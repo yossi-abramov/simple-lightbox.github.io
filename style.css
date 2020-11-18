@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'Lato', sans-serif;
+}
+
+h1{
+    text-transform: uppercase;
+    padding: 0 15px;
+    text-align: center;
+}
+
+p{
+    padding: 0 15px;
+    text-align: center;
+}
+
+.images-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 15px;
+    margin: 25px 0;
+}
+
+.images-container .image-wrapper{
+    position: relative;
+    margin: 10px;
+    cursor: pointer;
+    display: flex;
+    border-radius: 3px;
+    overflow: hidden;
+    transition: all 0.1s ease-in;
+    opacity: 1;
+}
+
+/* Loading Styles */
+
+.images-container.loading .image-wrapper{
+    opacity: 0.2;
+}
+
+.images-container.loading .image-wrapper::after{
+    background-color: lightgrey;
+} 
+
+.images-container.loading .image-wrapper::before{
+   z-index: -1;
+}
+
+.images-container .image-wrapper::before{
+    content: 'Pick Me!';
+    position: absolute;
+    color: #fff;
+    top: 42.5%;
+    transform: translateY(50%);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    font-size: 20px;
+    text-transform: uppercase;
+    transition: all 0.1s ease-in;
+}
+
+.images-container .image-wrapper::after{
+    content: '';
+    position: absolute;
+    background-color: rgba(0,0,0,0.3);
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.images-container .image-wrapper img{
+    cursor: pointer;
+    max-width: 200px;
+    width: 100%;
+    max-height: 130px;
+    object-fit: cover;
+}
+
+.images-container .image-wrapper:hover::before{
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid crimson;
+}
+
+/* Lightbox */
+
+.lightbox{
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    left:0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease-in;
+}
+
+.lightbox.show{
+    background-color: rgba(0,0,0, 0.85);
+    opacity: 1;
+    visibility: visible;
+    z-index: 1000;
+}
+
+.lightbox img{
+    max-width: 90%;
+}
+
+/* Close lightbox "x" icon */
+
+.lightbox .close-lightbox{
+    cursor: pointer;
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    width: 20px;
+    height: 20px;
+}
+
+.lightbox .close-lightbox::after, 
+.lightbox .close-lightbox::before{
+    content: '';
+    width: 3px;
+    height: 20px;
+    background-color: #ddd;
+    position: absolute;
+    border-radius: 5px;
+    transform: rotate(45deg);
+}
+
+.lightbox .close-lightbox::before{
+    transform: rotate(-45deg);
+}
+
+.lightbox .close-lightbox:hover::after, 
+.lightbox .close-lightbox:hover::before{
+    background-color: #fff;
+}
